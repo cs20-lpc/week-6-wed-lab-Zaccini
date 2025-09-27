@@ -46,61 +46,42 @@ int main() {
  * TODO: make them tail recursive :)
 *******************************************************************************/
 
+unsigned factTail(unsigned n, unsigned acc = 1) {
+    if (n <= 1) return acc;
+    return factTail(n - 1, n * acc);
+}
 unsigned fact(unsigned n) {
-    // base cases (combined)
-    if (n <= 1) {
-        return 1;
-    }
-
-    // recursive case
-    unsigned res = fact(n - 1);
-    return res * n;
+    return factTail(n);
 }
 
+unsigned fibTail(unsigned n, unsigned a = 0, unsigned b = 1) {
+    if (n == 0) return a;
+    return fibTail(n - 1, b, a + b);
+}
 unsigned fib(unsigned n) {
-    // base case 1
-    if (n == 0) {
-        return 0;
-    }
-
-    // base case 2
-    else if (n == 1) {
-        return 1;
-    }
-
-    // recursive case
-    return fib(n - 1) + fib(n - 2);
+    return fibTail(n);
 }
 
+unsigned multTail(unsigned x, unsigned y, unsigned acc = 0) {
+    if (y == 0) return acc;
+    return multTail(x, y - 1, acc + x);
+}
 unsigned mult(unsigned x, unsigned y) {
-    // base case
-    if (y == 0) {
-        return 0;
-    }
-
-    // recursive case
-    unsigned res = mult(x, y - 1);
-    return res + x;
+    return multTail(x, y);
 }
 
+unsigned powerTail(unsigned x, unsigned y, unsigned acc = 1) {
+    if (y == 0) return acc;
+    return powerTail(x, y - 1, acc * x);
+}
 unsigned power(unsigned x, unsigned y) {
-    // base case
-    if (y == 0) {
-        return 1;
-    }
-
-    // recursive case
-    unsigned res = power(x, y - 1);
-    return res * x;
+    return powerTail(x, y);
 }
 
+unsigned productTail(unsigned x, unsigned y, unsigned acc = 1) {
+    if (x > y) return acc;
+    return productTail(x + 1, y, acc * x);
+}
 unsigned product(unsigned x, unsigned y) {
-    // base case
-    if (x == y) {
-        return x;
-    }
-
-    // recursive case
-    unsigned p = product(x + 1, y);
-    return p * x;
+    return productTail(x, y);
 }
